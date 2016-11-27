@@ -1,0 +1,12 @@
+= form_for @blog do |f|
+  = f.text_area :body, placeholder: "投稿しよう"
+  = f.submit "投稿する"
+
+ul#blogs
+- @blogs.each do |blog|
+  li.blog
+    p
+      span 
+        | #{blog.id}:
+      span.body
+        = link_to blog.body, blog_path(blog)
