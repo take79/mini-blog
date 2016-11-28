@@ -1,12 +1,19 @@
 = form_for @blog do |f|
-  = f.text_area :body, placeholder: "投稿しよう"
+  = f.text_field :body, placeholder: "投稿しよう"
   = f.submit "投稿する"
 
 ul#blogs
-- @blogs.each do |blog|
-  li.blog
-    p
-      span 
-        | #{blog.id}:
-      span.body
-        = link_to blog.body, blog_path(blog)
+  - @blogs.each do |blog|
+    li.blog
+      p
+        span
+          | #{blog.id}:
+        span.body
+          = link_to blog.body, blog_path(blog)
+      p.meta
+        span.like
+          | いいね: #{blog.like}
+        span.comment
+          | コメント数: #{Reply.where(blog_id: blog.id).count}
+        span.post-date
+          | 投稿日時: #{blog.created_at}

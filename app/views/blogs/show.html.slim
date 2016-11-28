@@ -1,6 +1,15 @@
 p#notice = notice
 
+= link_to '戻る', blogs_path
 
-= link_to 'Edit', edit_blog_path(@blog)
-'|
-= link_to 'Back', blogs_path
+.blog-detail
+  p
+    span
+      | #{@blog.id}:
+    span.post-date
+      | 投稿日時：#{@blog.created_at}
+    span.likes
+      | いいね:#{Reply.where(blog_id: @blog.id).count}
+  p.body
+    = @blog.body
+
