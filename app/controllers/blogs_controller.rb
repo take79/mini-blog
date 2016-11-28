@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: [:show, :edit, :update, :destroy]
+  before_action :set_blog, only: [:show, :edit, :update, :destroy, :like]
 
   # GET /blogs
   # GET /blogs.json
@@ -62,6 +62,12 @@ class BlogsController < ApplicationController
       format.html { redirect_to blogs_url, notice: 'Blog was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def like
+    @blog.like += 1
+    @blog.save
+    redirect_to blogs_path
   end
 
   private

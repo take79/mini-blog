@@ -12,7 +12,7 @@ ul#blogs
           = link_to blog.body, blog_path(blog)
       p.meta
         span.like
-          | いいね: #{blog.like}
+          = link_to "いいね:#{blog.like}", blog_like_path(blog.id), method: :patch
         span.comment
           | コメント数: #{Reply.where(blog_id: blog.id).count}
         span.post-date

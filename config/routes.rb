@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :replies
   resources :blogs
+  patch 'blogs/:id/like', to: 'blogs#like', as: 'blog_like'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
