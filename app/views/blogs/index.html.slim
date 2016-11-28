@@ -14,6 +14,6 @@ ul#blogs
         span.like
           = link_to "いいね:#{blog.like}", blog_like_path(blog.id, from_action: controller.action_name), method: :patch
         span.comment
-          | コメント数: #{Reply.where(blog_id: blog.id).count}
+          |  | コメント数:#{Reply.where(blog_id: blog.id).count} 
         span.post-date
-          | 投稿日時: #{blog.created_at.to_s(:db)}
+          | | 投稿日時: #{blog.created_at.to_s(:db)}
