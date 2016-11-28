@@ -13,3 +13,16 @@ p#notice = notice
   p.body
     = @blog.body
 
+= form_for @reply do |f|
+  = f.text_field :comment, placeholder: "コメントしよう"
+  = f.hidden_field :blog_id, value: @blog.id
+  = f.submit "コメントする"
+
+ol#replies
+  - @replies.each do |reply|
+    li.reply
+      p
+        span.comment
+          | #{reply.comment} | 
+        span.post-date
+          | 投稿日時:#{reply.created_at}
