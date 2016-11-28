@@ -4,7 +4,7 @@ class BlogsController < ApplicationController
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = Blog.all
+    @blogs = Blog.all.order("id DESC")
     @blog = Blog.new
   end
 
@@ -12,7 +12,7 @@ class BlogsController < ApplicationController
   # GET /blogs/1.json
   def show
     @reply = Reply.new
-    @replies = Reply.where(blog_id: @blog.id)
+    @replies = Reply.where(blog_id: @blog.id).order("id DESC")
   end
 
   # GET /blogs/new
@@ -31,11 +31,9 @@ class BlogsController < ApplicationController
 
     respond_to do |format|
       if @blog.save
-        format.html { redirect_to @blog, notice: 'Blog was successfully created.' }
-        format.json { render :show, status: :created, location: @blog }
+        format.html { redirect_to blogs_path }
       else
-        format.html { render :new }
-        format.json { render json: @blog.errors, status: :unprocessable_entity }
+        format.html { render :index }
       end
     end
   end
@@ -67,7 +65,11 @@ class BlogsController < ApplicationController
   def like
     @blog.like += 1
     @blog.save
-    redirect_to blogs_path
+    if params[:from_action] == "index"
+      redirect_to blogs_path
+    elsif params[:from_action] == "show"
+      redirect_to blog_path(@blog.id)
+    end
   end
 
   private

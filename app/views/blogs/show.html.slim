@@ -9,7 +9,7 @@ p#notice = notice
     span.post-date
       | 投稿日時：#{@blog.created_at}
     span.likes
-      | いいね:#{Reply.where(blog_id: @blog.id).count}
+      = link_to "いいね:#{@blog.like}", blog_like_path(@blog.id, from_action: controller.action_name), method: :patch
   p.body
     = @blog.body
 

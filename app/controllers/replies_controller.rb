@@ -28,11 +28,9 @@ class RepliesController < ApplicationController
 
     respond_to do |format|
       if @reply.save
-        format.html { redirect_to @reply, notice: 'Reply was successfully created.' }
-        format.json { render :show, status: :created, location: @reply }
+        format.html { redirect_to blog_path(reply_params[:blog_id])}
       else
-        format.html { render :new }
-        format.json { render json: @reply.errors, status: :unprocessable_entity }
+        format.html { render blog_path(reply_params[:blog_id]) }
       end
     end
   end
