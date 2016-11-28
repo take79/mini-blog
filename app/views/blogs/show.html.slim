@@ -7,7 +7,7 @@ p#notice = notice
     span
       | #{@blog.id}:
     span.post-date
-      | 投稿日時：#{@blog.created_at}
+      | 投稿日時：#{@blog.created_at.to_s(:db)}
     span.likes
       = link_to "いいね:#{@blog.like}", blog_like_path(@blog.id, from_action: controller.action_name), method: :patch
   p.body
@@ -25,4 +25,4 @@ ol#replies
         span.comment
           | #{reply.comment} | 
         span.post-date
-          | 投稿日時:#{reply.created_at}
+          | 投稿日時:#{reply.created_at.to_s(:db)}

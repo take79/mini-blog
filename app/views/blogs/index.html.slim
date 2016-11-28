@@ -7,7 +7,7 @@ ul#blogs
     li.blog
       p
         span
-          | #{blog.id}:
+          | #{blog.id}: 
         span.body
           = link_to blog.body, blog_path(blog)
       p.meta
@@ -16,4 +16,4 @@ ul#blogs
         span.comment
           | コメント数: #{Reply.where(blog_id: blog.id).count}
         span.post-date
-          | 投稿日時: #{blog.created_at}
+          | 投稿日時: #{blog.created_at.to_s(:db)}
